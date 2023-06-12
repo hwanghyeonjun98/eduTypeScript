@@ -50,7 +50,7 @@ let null1: null = null;
 let undefined1: undefined = undefined;
 ```
 
-#### 리터널 : 값으로 타입을 지정 할 수 있다.(정해진 값으로면 사용해야함.)
+#### Literal : 값으로 타입을 지정 할 수 있다.(정해진 값으로면 사용해야함.)
 
 ```typescript
 let numA: 10 = 10;
@@ -58,9 +58,9 @@ let strA: "hello" = "hello";
 let boolA: true = true;
 ```
 
-### 배열(array), 튜플(tuple)
+### 배열(Array), 튜플(Tuple)
 
-#### 배열(array)
+#### 배열(Array)
 
 - type[] 또는 Array<type(generic)> 2가지 방식으로 정의가 가능
 
@@ -138,5 +138,66 @@ let config: {
 	readonly apiKey: string;
 } = {
 	apiKey: "my api key"
+};
+```
+
+### 타입 별칭(Type Aliases), 인덱스 시그니처(Index Signatures)
+
+#### 타입 별칭(Type Aliases)
+
+- 타입 별칭을 선언 할 때 같은 스코프내에서는 사용 불가
+- function 내에 선언시 function 안에 있는 타입 별칭이 사용됨.
+- 타입 별칭도 컴파일 시 js에서는 제거
+
+```typescript
+type User = {
+	id: number;
+	name: string;
+	nickname: string;
+	birth: string;
+	bio: string;
+	location: string;
+}
+
+let user: User = {
+	id      : 1,
+	name    : "jjun",
+	nickname: "j",
+	birth   : "1998.11.28",
+	bio     : "안녕하세요.",
+	location: "서울시"
+};
+```
+
+#### 인덱스 시그니쳐(Index Signatures)
+
+- key와 value가 규칙 적일 때 사용
+- <code>[key: [type]]: string</code>으로 작성
+
+```typescript
+type ConutryCodes = {
+	[key: string]: string
+}
+
+let conutryCodes: ConutryCodes = {
+	Korea        : "ko",
+	UnitedState  : "us",
+	UnitedKingdom: "uk"
+};
+```
+
+- 인덱스 시그니처 주의 점
+	- 인덱스 시그니처가 비여 있으면 빈 객체도 허용됨
+	- 특정 필수 값이 있어여 한다면 인덱스 시그니처 뒤 원하는 값 적용
+	- 인덱스 시스니쳐의 타입과 추가 프로퍼티 타입이 동일 해야 함
+
+```typescript
+type ConutryNumbreCodes = {
+	[key: string]: number;
+	Korea: number;
+}
+
+let conutryNumbreCodes: ConutryNumbreCodes = {
+	Korea: 410
 };
 ```
