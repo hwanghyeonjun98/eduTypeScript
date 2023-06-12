@@ -100,3 +100,43 @@ const users: [string, number][] = [
 	// [4, "user3"]
 ];
 ```
+
+### 객체(object)
+
+- 객체 타입 정의 시 object가 아닌 <code>{[key]: [tpye]}</code>형식 인 객체 리터널 타입으로 정의
+
+```typescript
+let user: {
+	id: number;
+	name: string;
+} = {
+	id  : 1,
+	name: "jjun"
+};
+```
+
+- key 값이 필수가 아닌 경우 <code>{[key]?: [tpye]}</code> optional property("?") 사용
+
+```typescript
+let user: {
+	id?: number;
+	name: string;
+} = {
+	id  : 1,
+	name: "jjun"
+};
+
+user = {
+	name: "홀길동"
+}
+```
+
+- objact에 값이 바뀌면 안되는 경우에는 <code>readonly</code>를 사용
+
+```typescript
+let config: {
+	readonly apiKey: string;
+} = {
+	apiKey: "my api key"
+};
+```
