@@ -131,7 +131,7 @@ user = {
 }
 ```
 
-- objact에 값이 바뀌면 안되는 경우에는 <code>readonly</code>를 사용
+- object에 값이 바뀌면 안되는 경우에는 <code>readonly</code>를 사용
 
 ```typescript
 let config: {
