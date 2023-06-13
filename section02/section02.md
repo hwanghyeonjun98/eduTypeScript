@@ -288,3 +288,38 @@ unknownVar = () => {
 
 num = unknownVar;
 ```
+
+### Void Type, Never Type
+
+#### Void Type
+
+- 아무것도 없음을 의미하는 타입
+- void 타입으로 정의를 하면 아무 값을 담을 수 없음
+- undefined만 담을 수 있음
+
+```typescript
+function func2(): void {
+	console.log("hello");
+}
+
+let a: void;
+a = undefined;
+```
+
+- tsconfig.json에서 <code>"strictNullChecks": false</code> 설정하면 null 값 할당 가능
+
+#### Never Type
+
+- 어떤한 값도 할당이 불가능하다.
+- tsconfig.json에서 <code>"strictNullChecks": false</code> 설정해도 null 값 사용 불가
+
+```typescript
+function func3(): never {
+	while (true) {
+	}
+}
+
+function func4(): never {
+	throw new Error();
+}
+```
