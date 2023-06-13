@@ -201,3 +201,61 @@ let conutryNumbreCodes: ConutryNumbreCodes = {
 	Korea: 410
 };
 ```
+
+### 열거형 타입(Enumerable Type)
+
+- 여러가지 값의 이름을 부여해 열거하는 타입
+- 타입 별칭과 사용방법 동일
+
+```typescript
+enum Role {
+	ADMIM = 0,
+	USER  = 1,
+	GEUST = 2,
+}
+
+enum Language {
+	Korean  = "ko",
+	english = "en"
+}
+
+const user1 = {
+	name    : "jjun",
+	role    : Role.ADMIM, // 0 <- 관리자
+	language: Language.Korean
+};
+
+const user2 = {
+	nmae: "hong",
+	role: Role.USER // 1 <- 일반유저
+};
+
+const user3 = {
+	nmae: "kim",
+	role: Role.GEUST // 2 <- 게스트
+};
+```
+
+- 숫자형 enum은 할당을 안해도 자동으로 할당
+- 처음 숫자가 10이면 밑에도 자동 할당
+- 중간에 할당 가능
+
+```typescript
+enum Role1 {
+	ADMIM,
+	USER,
+	GEUST,
+}
+
+enum Role2 {
+	ADMIM = 10,
+	USER, // <- 11
+	GEUST,// <- 12
+}
+
+enum Role3 {
+	ADMIM,
+	USER = 10,
+	GEUST,
+}
+```
