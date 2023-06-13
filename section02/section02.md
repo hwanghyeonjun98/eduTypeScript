@@ -259,3 +259,32 @@ enum Role3 {
 	GEUST,
 }
 ```
+
+### Any Type, Unknown Type
+
+#### Any
+
+- 특정 변수의 타입을 확실히 모를때 사용
+- 모든 타입에 모든 변수를 집어 넣을 수 있다.
+
+```typescript
+let anyVar: any = 10;
+anyVar = "hello";
+
+let num: number = 10;
+num = anyVar;
+```
+
+#### Unknown
+
+- Any 타입과 비숫하지만 다른 타입에 할당 할 수 없다.
+
+```typescript
+let unknownVar: unknown;
+unknownVar = "";
+unknownVar = 1;
+unknownVar = () => {
+};
+
+num = unknownVar;
+```
