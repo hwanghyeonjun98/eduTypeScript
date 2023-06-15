@@ -4,7 +4,7 @@ import Editor from "./components/Editor";
 import Item from "./components/Item";
 
 function reducer(state: Todo[], action) {
-// asdasdasdsadasdasd
+
 }
 
 function App() {
