@@ -1,20 +1,51 @@
 import "./App.css";
-import React, {useEffect, useReducer, useRef} from "react";
+import React, {useContext, useEffect, useReducer, useRef} from "react";
 import Editor from "./components/Editor";
 import Item from "./components/Item";
+import {Todo} from "./types";
 
-function reducer(state: Todo[], action) {
+type Action = | {
+	type: "CREATE";
+	data: {
+		id: number;
+		content: string;
+	}
+} | {
+	type: "DELETE";
+	id: number;
+}
 
+function reducer(state: Todo[], action: Action) {
+	switch (action.type) {
+		case "CREATE": {
+			return [...state, action.data];
+		}
+		case "DELETE": {
+			return state.filter((todo) => todo.id !== action.id);
+		}
+	}
+}
+
+export const TodoStateContext = React.createContext<Todo[] | null>(null);
+export const TodoDispatchContext = React.createContext<{
+	onClickAdd: (text: string) => void;
+	onClickDelete: (id: number) => void;
+} | null>(null);
+
+export function useTodoDispatch() {
+	const dispatch = useContext(TodoDispatchContext);
+	if (!dispatch) throw new Error("TodoDispatchContext 문제");
+	return dispatch;
 }
 
 function App() {
-	const [todos, dispatch] = useReducer([]);
+	const [todos, dispatch] = useReducer(reducer, []);
 
 	const idRef: React.MutableRefObject<number> = useRef(0);
 
 	const onClickAdd = (text: string) => {
 		dispatch({
-			type: "CRETATE",
+			type: "CREATE",
 			data: {
 				id     : idRef.current++,
 				content: text,
@@ -37,8 +68,12 @@ function App() {
 	return (
 		<div className="App">
 			<h2>Todo</h2>
-			<Editor onClickAdd={onClickAdd} />
-			<div>{todos.map((todo) => (<Item key={todo.id} {...todo} onClickDelete={onClickDelete} />))}</div>
+			<TodoStateContext.Provider value={todos}>
+				<TodoDispatchContext.Provider value={{onClickAdd, onClickDelete}}>
+					<Editor />
+					<div>{todos.map((todo) => (<Item key={todo.id} {...todo} />))}</div>
+				</TodoDispatchContext.Provider>
+			</TodoStateContext.Provider>
 		</div>
 	);
 }
