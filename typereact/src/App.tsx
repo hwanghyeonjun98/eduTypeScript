@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useReducer, useRef} from "react";
 import Editor from "./components/Editor";
 import Item from "./components/Item";
 import {Todo} from "./types";
+import _ from "lodash";
 
 type Action = | {
 	type: "CREATE";
